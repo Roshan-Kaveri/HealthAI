@@ -33,6 +33,13 @@ models = {
 }
 scaler = joblib.load("models/scaler.pkl")
 
+if not os.path.isdir("static"):
+    os.makedirs("static", exist_ok=True)
+
+if not os.path.isdir("models"):
+    os.makedirs("models", exist_ok=True)
+
+
 with open("models/feature_info.json") as f:
     meta           = json.load(f)
     top_features   = meta["top_features"]
