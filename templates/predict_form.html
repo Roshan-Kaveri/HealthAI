@@ -4,10 +4,17 @@
 <body>
     <h2>Enter Patient Details</h2>
     <form method="post">
-        {% for feature in features %}
+        {% for feature in top_features %}
             <label>{{ feature }}:</label>
             <input type="text" name="{{ feature }}" placeholder="e.g. {{ medians[feature]|round(2) }}"><br>
         {% endfor %}
+        <div id="extra" style="display:none;">
+        {% for feature in extra_features %}
+            <label>{{ feature }}:</label>
+            <input type="text" name="{{ feature }}" placeholder="e.g. {{ medians[feature]|round(2) }}"><br>
+        {% endfor %}
+        </div>
+        <button type="button" onclick="document.getElementById('extra').style.display='block';">Show All</button>
         <button type="submit">Predict</button>
     </form>
 </body>
