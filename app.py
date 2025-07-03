@@ -113,6 +113,8 @@ def predict_disease():
         plt.savefig(shap_file, bbox_inches="tight")
         plt.close()
 
+        result = "Normal" if y_pred == 0 else "Abnormal"
+
         results[name] = {
             "prediction": y_pred,
             "accuracy":   acc,
@@ -120,6 +122,7 @@ def predict_disease():
             "f1":         f1,
             "cm_image":   os.path.basename(cm_file),
             "shap_image": os.path.basename(shap_file),
+            "result":     result,
         }
 
     return render_template("result.html",

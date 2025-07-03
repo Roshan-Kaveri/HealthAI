@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html>
-<head><title>Health Prediction Home</title></head>
-<body>
-    <h1>Welcome to Health Prediction Portal</h1>
-    <button onclick="window.location.href='/predict/respiratory-disease-child'">Predict Survival Rate of Pediatric Children</button>
-    <button onclick="window.location.href='/predict/social-anxiety'">Predict Social Anxiety (Coming Soon)</button>
+<head>
+    <title>Health Prediction Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="text-center space-y-6">
+        <h1 class="text-3xl font-bold">Welcome to Health Prediction Portal</h1>
+        <div class="space-x-4">
+            <button class="px-4 py-2 bg-blue-600 text-white rounded" onclick="window.location.href='/predict/respiratory-disease-child'">Predict Survival Rate of Pediatric Children</button>
+            <button class="px-4 py-2 bg-gray-400 text-white rounded" onclick="window.location.href='/predict/social-anxiety'">Predict Social Anxiety (Coming Soon)</button>
+        </div>
+    </div>
 </body>
 </html>
