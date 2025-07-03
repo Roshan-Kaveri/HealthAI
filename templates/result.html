@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head><title>Prediction Results</title></head>
+<body>
+    <h2>Prediction Results</h2>
+    <h3>User Input</h3>
+    <ul>
+    {% for key, val in user_input.items() %}
+        <li><b>{{ key }}:</b> {{ val }}</li>
+    {% endfor %}
+    </ul>
+
+    <h3>Model Predictions</h3>
+    {% for model, result in prediction_results.items() %}
+        <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+            <h4>{{ model }}</h4>
+            <p><strong>Predicted Class:</strong> {{ result.prediction }}</p>
+            <p><strong>Probability:</strong> {{ result.probability }}</p>
+            <img src="{{ url_for('static', filename=result.xai_image.split('static/')[1]) }}" alt="SHAP Explanation" width="400">
+        </div>
+    {% endfor %}
+</body>
+</html>

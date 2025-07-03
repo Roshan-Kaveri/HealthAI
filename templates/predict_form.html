@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head><title>Respiratory Disease Prediction</title></head>
+<body>
+    <h2>Enter Patient Details</h2>
+    <form method="post">
+        {% for feature in features %}
+            <label>{{ feature }}:</label>
+            <input type="text" name="{{ feature }}" placeholder="e.g. {{ medians[feature]|round(2) }}"><br>
+        {% endfor %}
+        <button type="submit">Predict</button>
+    </form>
+</body>
+</html>
