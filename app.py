@@ -22,11 +22,13 @@ models = {
 
 scaler = joblib.load('models/scaler.pkl')
 
-# Load top 15 features and their medians
+# Load features information
 with open("models/feature_info.json", "r") as f:
     info = json.load(f)
-    top_features = info['features']
-    median_values = info['averages']
+    top_features = info['top_features']
+    median_values = info['all_medians']
+    all_features = info['all_features']
+    extra_features = [f for f in all_features if f not in top_features]
 
 @app.route('/')
 def home():
@@ -67,7 +69,7 @@ def predict_disease():
 
         return render_template('result.html', user_input=user_input, prediction_results=prediction_results)
 
-    return render_template('predict_form.html', features=top_features, medians=median_values)
+    return render_template('predict_form.html', top_features=top_features, extra_features=extra_features, medians=median_values)
 
 @app.route('/predict/social-anxiety')
 def predict_social_anxiety():
