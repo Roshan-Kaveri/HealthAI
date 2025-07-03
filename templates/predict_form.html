@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Respiratory Disease Prediction</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         function toggleExtra() {
             const extraDiv = document.getElementById('extra');
@@ -16,23 +17,31 @@
         }
     </script>
 </head>
-<body>
-    <h2>Enter Patient Details</h2>
-    <form method="post">
+<body class="bg-gray-100 py-8">
+    <h2 class="text-center text-xl font-semibold mb-6">Enter Patient Details</h2>
+    <form method="post" class="max-w-3xl mx-auto bg-white p-6 rounded shadow">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         {% for feature in top_features %}
-            <label>{{ feature }}:</label>
-            <input type="text" name="{{ feature }}" value="{{ medians[feature]|round(2) }}"><br>
-        {% endfor %}
-
-        <div id="extra" style="display:none;">
-        {% for feature in extra_features %}
-            <label>{{ feature }}:</label>
-            <input type="text" name="{{ feature }}" value="{{ medians[feature]|round(2) }}"><br>
+            <div>
+                <label class="block text-sm font-medium mb-1">{{ feature }}:</label>
+                <input class="w-full border rounded p-2" type="text" name="{{ feature }}" value="{{ medians[feature]|round(2) }}">
+            </div>
         {% endfor %}
         </div>
 
-        <button type="button" id="toggle-btn" onclick="toggleExtra()">Show All</button>
-        <button type="submit">Predict</button>
+        <div id="extra" class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4" style="display:none;">
+        {% for feature in extra_features %}
+            <div>
+                <label class="block text-sm font-medium mb-1">{{ feature }}:</label>
+                <input class="w-full border rounded p-2" type="text" name="{{ feature }}" value="{{ medians[feature]|round(2) }}">
+            </div>
+        {% endfor %}
+        </div>
+
+        <div class="mt-4 flex justify-between">
+            <button type="button" id="toggle-btn" class="px-4 py-2 bg-blue-500 text-white rounded" onclick="toggleExtra()">Show All</button>
+            <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded">Predict</button>
+        </div>
     </form>
 </body>
 </html>

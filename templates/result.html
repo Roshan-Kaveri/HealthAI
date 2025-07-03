@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html>
-<head><title>Prediction Results</title></head>
-<body>
-<h2>Prediction Results</h2>
+<head>
+    <title>Prediction Results</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 py-8">
+<h2 class="text-center text-2xl font-semibold mb-6">Prediction Results</h2>
 
-<h3>User Input</h3>
-<ul>
+<h3 class="text-xl font-medium mb-2 text-center">User Input</h3>
+<div class="max-w-4xl mx-auto bg-white p-4 rounded shadow grid grid-cols-1 md:grid-cols-2 gap-2 mb-8">
   {% for k, v in user_input.items() %}
-    <li><b>{{ k }}:</b> {{ v }}</li>
+    <div class="flex justify-between border-b py-1">
+      <span class="font-semibold mr-2">{{ k }}:</span>
+      <span>{{ v }}</span>
+    </div>
   {% endfor %}
-</ul>
+</div>
 
-<h3>Model Predictions</h3>
+<h3 class="text-xl font-medium mb-4 text-center">Model Predictions</h3>
+<div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
 {% for model, result in prediction_results.items() %}
-  <div style="border:1px solid #ccc; padding:10px; margin:10px;">
-    <h4>{{ model }}</h4>
-    <p><b>Predicted Class:</b> {{ result.prediction }}</p>
+  <div class="bg-white p-4 rounded shadow">
+    <h4 class="text-lg font-bold mb-2">{{ model }}</h4>
     <p><b>Accuracy:</b> {{ result.accuracy }}</p>
     <p><b>Recall:</b>   {{ result.recall }}</p>
     <p><b>F1 Score:</b> {{ result.f1 }}</p>
 
-    <!-- Confusion-matrix image -->
-    <img src="{{ url_for('static', filename=result.cm_image) }}"
-         alt="Confusion matrix" width="220" style="display:block;margin-bottom:8px;">
-
-    <!-- SHAP waterfall -->
-    <img src="{{ url_for('static', filename=result.shap_image) }}"
-         alt="SHAP waterfall"  width="420">
+    <img class="mt-2" src="{{ url_for('static', filename=result.cm_image) }}" alt="Confusion matrix" width="220">
+    <img class="mt-2" src="{{ url_for('static', filename=result.shap_image) }}" alt="SHAP waterfall"  width="420">
+    <p class="mt-2"><b>Result:</b> {{ result.result }}</p>
   </div>
 {% endfor %}
+</div>
 </body>
 </html>
