@@ -1,20 +1,37 @@
 <!DOCTYPE html>
 <html>
-<head><title>Respiratory Disease Prediction</title></head>
+<head>
+    <title>Respiratory Disease Prediction</title>
+    <script>
+        function toggleExtra() {
+            const extraDiv = document.getElementById('extra');
+            const toggleBtn = document.getElementById('toggle-btn');
+            if (extraDiv.style.display === 'none') {
+                extraDiv.style.display = 'block';
+                toggleBtn.innerText = 'Show Less';
+            } else {
+                extraDiv.style.display = 'none';
+                toggleBtn.innerText = 'Show All';
+            }
+        }
+    </script>
+</head>
 <body>
     <h2>Enter Patient Details</h2>
     <form method="post">
         {% for feature in top_features %}
             <label>{{ feature }}:</label>
-            <input type="text" name="{{ feature }}" placeholder="e.g. {{ medians[feature]|round(2) }}"><br>
+            <input type="text" name="{{ feature }}" value="{{ medians[feature]|round(2) }}"><br>
         {% endfor %}
+
         <div id="extra" style="display:none;">
         {% for feature in extra_features %}
             <label>{{ feature }}:</label>
-            <input type="text" name="{{ feature }}" placeholder="e.g. {{ medians[feature]|round(2) }}"><br>
+            <input type="text" name="{{ feature }}" value="{{ medians[feature]|round(2) }}"><br>
         {% endfor %}
         </div>
-        <button type="button" onclick="document.getElementById('extra').style.display='block';">Show All</button>
+
+        <button type="button" id="toggle-btn" onclick="toggleExtra()">Show All</button>
         <button type="submit">Predict</button>
     </form>
 </body>

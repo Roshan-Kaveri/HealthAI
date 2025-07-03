@@ -2,22 +2,32 @@
 <html>
 <head><title>Prediction Results</title></head>
 <body>
-    <h2>Prediction Results</h2>
-    <h3>User Input</h3>
-    <ul>
-    {% for key, val in user_input.items() %}
-        <li><b>{{ key }}:</b> {{ val }}</li>
-    {% endfor %}
-    </ul>
+<h2>Prediction Results</h2>
 
-    <h3>Model Predictions</h3>
-    {% for model, result in prediction_results.items() %}
-        <div style="border:1px solid #ccc; padding:10px; margin:10px;">
-            <h4>{{ model }}</h4>
-            <p><strong>Predicted Class:</strong> {{ result.prediction }}</p>
-            <p><strong>Probability:</strong> {{ result.probability }}</p>
-            <img src="{{ url_for('static', filename=result.xai_image.split('static/')[1]) }}" alt="SHAP Explanation" width="400">
-        </div>
-    {% endfor %}
+<h3>User Input</h3>
+<ul>
+  {% for k, v in user_input.items() %}
+    <li><b>{{ k }}:</b> {{ v }}</li>
+  {% endfor %}
+</ul>
+
+<h3>Model Predictions</h3>
+{% for model, result in prediction_results.items() %}
+  <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+    <h4>{{ model }}</h4>
+    <p><b>Predicted Class:</b> {{ result.prediction }}</p>
+    <p><b>Accuracy:</b> {{ result.accuracy }}</p>
+    <p><b>Recall:</b>   {{ result.recall }}</p>
+    <p><b>F1 Score:</b> {{ result.f1 }}</p>
+
+    <!-- Confusion-matrix image -->
+    <img src="{{ url_for('static', filename=result.cm_image) }}"
+         alt="Confusion matrix" width="220" style="display:block;margin-bottom:8px;">
+
+    <!-- SHAP waterfall -->
+    <img src="{{ url_for('static', filename=result.shap_image) }}"
+         alt="SHAP waterfall"  width="420">
+  </div>
+{% endfor %}
 </body>
 </html>
